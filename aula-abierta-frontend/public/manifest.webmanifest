@@ -1,0 +1,14 @@
+{
+  "name": "Aula Abierta",
+  "short_name": "Aula",
+  "description": "Aula Abierta — open source learning platform for English practice.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FCFBF8",
+  "theme_color": "#D31A2A",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

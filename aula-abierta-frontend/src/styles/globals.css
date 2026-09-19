@@ -1,0 +1,372 @@
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand-blue:   #1D95FB;
+    --color-brand-red:    #D31A2A;
+    --color-brand-yellow: #FED401;
+    --color-brand-sky:    #A1D5F8;
+    --color-brand-cream:  #FFF5DD;
+    --radius-card:        1rem;
+    --radius-input:       0.75rem;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    background: #0F1115;
+  }
+
+  html {
+    @apply font-body text-neutral-800 bg-neutral-50 antialiased;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: #FFFCF5;
+    overflow: hidden;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold text-neutral-900 leading-tight;
+  }
+
+  h1 { @apply text-4xl; }
+  h2 { @apply text-3xl; }
+  h3 { @apply text-2xl; }
+  h4 { @apply text-xl; }
+  h5 { @apply text-lg; }
+
+  a {
+    @apply text-brand-blue hover:underline transition-colors;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-blue ring-offset-2;
+  }
+
+  ::selection {
+    @apply bg-brand-sky text-neutral-900;
+  }
+
+  * {
+    @apply border-neutral-200;
+  }
+
+  h1, h2 {
+    text-wrap: balance;
+  }
+
+  h3, p {
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 1ms !important;
+    }
+  }
+
+  .reduce-motion *,
+  .reduce-motion *::before,
+  .reduce-motion *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@layer utilities {
+  .dark body,
+  .dark .bg-\[\#FFFCF5\] {
+    background-color: #0F1115 !important;
+  }
+
+  .dark .bg-white,
+  .dark .bg-white\/95,
+  .dark .bg-white\/90 {
+    background-color: #1A1D22 !important;
+  }
+
+  .dark .bg-neutral-50,
+  .dark .bg-neutral-50\/80,
+  .dark .bg-\[\#FFFDF8\] {
+    background-color: #14171B !important;
+  }
+
+  .dark .bg-neutral-100 {
+    background-color: #24282F !important;
+  }
+
+  .dark .bg-brand-cream,
+  .dark .bg-brand-cream\/55 {
+    background-color: #2B271A !important;
+  }
+
+  .dark .bg-red-50,
+  .dark .bg-red-50\/40 {
+    background-color: #33191E !important;
+  }
+
+  .dark .bg-brand-sky\/15,
+  .dark .bg-brand-sky\/20,
+  .dark .bg-brand-sky\/25,
+  .dark .bg-brand-sky\/30,
+  .dark .bg-brand-sky\/35,
+  .dark .bg-brand-sky\/40 {
+    background-color: #173044 !important;
+  }
+
+  .dark .bg-brand-yellow\/25,
+  .dark .bg-brand-yellow\/30 {
+    background-color: #393313 !important;
+  }
+
+  .dark .text-neutral-900,
+  .dark .text-neutral-800,
+  .dark .text-neutral-700 {
+    color: #F7F8FA !important;
+  }
+
+  .dark .text-neutral-600,
+  .dark .text-neutral-500,
+  .dark .text-neutral-400 {
+    color: #B6BBC4 !important;
+  }
+
+  .dark .border-neutral-100,
+  .dark .border-neutral-200,
+  .dark .border-neutral-300 {
+    border-color: #30343C !important;
+  }
+
+  .dark input,
+  .dark textarea,
+  .dark select {
+    border-color: #343943 !important;
+    background-color: #1A1D22 !important;
+    color: #F7F8FA !important;
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: #777E89 !important;
+  }
+
+  .dark *:focus-visible {
+    --tw-ring-offset-color: #0F1115;
+  }
+
+  .dark .bg-brand-blue .bg-white,
+  .dark .bg-brand-red .bg-white {
+    background-color: #F7F8FA !important;
+    color: #1E1C18 !important;
+  }
+
+  .dark .bg-brand-blue .bg-white.text-neutral-900,
+  .dark .bg-brand-red .bg-white.text-neutral-900,
+  .dark .bg-brand-blue .bg-white .text-neutral-900,
+  .dark .bg-brand-blue .bg-white .text-neutral-800,
+  .dark .bg-brand-blue .bg-white .text-neutral-700,
+  .dark .bg-brand-red .bg-white .text-neutral-900,
+  .dark .bg-brand-red .bg-white .text-neutral-800,
+  .dark .bg-brand-red .bg-white .text-neutral-700 {
+    color: #1E1C18 !important;
+  }
+
+  .dark .bg-brand-yellow.text-neutral-900,
+  .dark .bg-brand-yellow .text-neutral-900,
+  .dark .bg-brand-yellow .text-neutral-800,
+  .dark .bg-brand-yellow .text-neutral-700 {
+    color: #1E1C18 !important;
+  }
+}
+
+@layer components {
+  .login-layout {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+  }
+
+  .login-hero-panel {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .login-layout {
+      height: 100dvh;
+      overflow: hidden;
+      flex-direction: row;
+    }
+
+    .login-hero-panel {
+      display: block;
+      width: 60%;
+      height: 100dvh;
+    }
+
+    .login-access-panel {
+      width: 40%;
+      height: 100dvh;
+      min-height: 0;
+    }
+  }
+
+  .page-container {
+    @apply mx-auto w-full max-w-[1536px] px-4 sm:px-6 lg:px-8 xl:px-10;
+  }
+
+  .surface {
+    @apply bg-white rounded-card shadow-soft border border-neutral-100;
+  }
+
+  .surface-elevated {
+    @apply bg-white rounded-card shadow-card border border-neutral-100;
+  }
+
+  .skeleton-base {
+    @apply bg-neutral-200 rounded animate-pulse;
+  }
+
+  .brand-stage {
+    @apply relative overflow-hidden bg-brand-blue text-white;
+  }
+
+  .brand-stage::before {
+    content: none;
+  }
+
+  .brand-swoop {
+    @apply absolute rounded-full bg-brand-cream;
+    width: 62rem;
+    height: 35rem;
+    right: -24rem;
+    bottom: -20rem;
+  }
+
+  .mascot-shadow {
+    filter: drop-shadow(0 22px 34px rgba(124, 18, 28, .2));
+  }
+
+  .pressable {
+    @apply transition-transform duration-150 active:scale-[.98] motion-reduce:transition-none;
+  }
+
+  /* Polished interactive card — lifts, brightens border, deepens shadow on hover. */
+  .card-interactive {
+    @apply transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform;
+  }
+  .card-interactive:hover {
+    @apply -translate-y-1 shadow-lift;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-interactive:hover { @apply translate-y-0; }
+  }
+
+  /* Frosted glass panel for overlays / floating chips. */
+  .glass {
+    @apply border border-white/40 bg-white/70 backdrop-blur-md;
+  }
+  .dark .glass {
+    @apply border-white/10 bg-white/[0.06];
+  }
+
+  /* ── Toy-card: tactile "physical card" base ─────────────────────────────
+     A chunky border + a colored bottom "lip" shadow makes cards feel like
+     printed/toy cards rather than flat SaaS divs. Compose with utilities. */
+  .toy-card {
+    @apply relative rounded-[20px] border-2 border-neutral-900/[0.07] bg-white;
+    box-shadow: 0 3px 0 0 rgba(31, 27, 22, 0.06), 0 10px 22px -10px rgba(31, 27, 22, 0.18);
+  }
+  .dark .toy-card {
+    @apply border-white/10 bg-surface-card;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.45), 0 10px 22px -10px rgba(0, 0, 0, 0.55);
+  }
+
+  /* Accent edge on the left — set --toy-accent to a brand color per card type. */
+  .toy-card-accent::before {
+    content: '';
+    @apply pointer-events-none absolute inset-y-3 left-0 w-1.5 rounded-full;
+    background: var(--toy-accent, theme('colors.brand.blue'));
+  }
+
+  /* 3D tilt container — pairs with the TiltCard component (preserve-3d). */
+  .toy-tilt {
+    transform-style: preserve-3d;
+    transition: box-shadow 0.3s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toy-tilt { transform: none !important; }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.neutral.300') transparent;
+  }
+
+  /* Gradient text — for hero headlines and celebratory numbers. */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    -webkit-background-clip: text;
+  }
+  .gradient-text-blue {
+    @apply gradient-text;
+    background-image: linear-gradient(120deg, #38A6FF 0%, #1D95FB 60%, #0B6FCB 100%);
+  }
+  .gradient-text-sunrise {
+    @apply gradient-text;
+    background-image: linear-gradient(120deg, #F2B705 0%, #FB7185 45%, #1D95FB 100%);
+    background-size: 200% auto;
+  }
+
+  /* Shimmer sweep overlay for loading skeletons. Put on a relative, overflow-hidden parent. */
+  .shimmer-overlay {
+    @apply pointer-events-none absolute inset-0 -translate-x-full;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+  .dark .shimmer-overlay {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer-overlay { animation: none; }
+  }
+
+  /* Soft branded mesh background. */
+  .mesh-joy {
+    background-image:
+      radial-gradient(at 12% 18%, rgba(29, 149, 251, 0.16) 0px, transparent 50%),
+      radial-gradient(at 88% 12%, rgba(254, 212, 1, 0.16) 0px, transparent 45%),
+      radial-gradient(at 78% 92%, rgba(211, 26, 42, 0.10) 0px, transparent 48%);
+  }
+}

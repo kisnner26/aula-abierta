@@ -1,0 +1,83 @@
+/* Shared avatar mascot animations — pure CSS, no JS, respects reduce-motion */
+
+@keyframes avatar-float {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+@keyframes avatar-breathe {
+  0%   { transform: scaleY(1); }
+  100% { transform: scaleY(1.03); }
+}
+
+@keyframes avatar-sleep-breathe {
+  0%   { transform: scaleY(1); }
+  100% { transform: scaleY(1.02); }
+}
+
+@keyframes avatar-celebrate-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@keyframes avatar-confetti-burst {
+  0%   { transform: translate(0, 0) scale(.4); opacity: 1; }
+  100% { transform: translate(var(--cx), var(--cy)) scale(1); opacity: 0; }
+}
+
+@keyframes avatar-head-tilt {
+  0%   { transform: rotate(-15deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes avatar-thinking-dot {
+  0%, 80%, 100% { opacity: 0.25; }
+  40%           { opacity: 1; }
+}
+
+@keyframes avatar-wave {
+  0%, 100% { transform: rotate(-10deg); }
+  50%      { transform: rotate(10deg); }
+}
+
+@keyframes avatar-wave-cycle {
+  0%, 70%, 100% { transform: rotate(0deg); }
+  10%, 30%      { transform: rotate(10deg); }
+  20%, 40%      { transform: rotate(-10deg); }
+}
+
+@keyframes avatar-z-rise {
+  0%   { transform: translate(0, 0) scale(.6); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translate(8px, -28px) scale(1); opacity: 0; }
+}
+
+@keyframes avatar-page-turn {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
+}
+
+.avatar-root          { display: inline-block; }
+.avatar-float         { animation: avatar-float 2.4s ease-in-out infinite alternate; transform-origin: center; }
+.avatar-breathe       { animation: avatar-breathe 2.4s ease-in-out infinite alternate; transform-origin: center bottom; transform-box: fill-box; }
+.avatar-sleep-breathe { animation: avatar-sleep-breathe 3s ease-in-out infinite alternate; transform-origin: center bottom; transform-box: fill-box; }
+.avatar-celebrate-bounce { animation: avatar-celebrate-bounce .3s ease-in-out 3 both; }
+.avatar-confetti      { animation: avatar-confetti-burst .9s ease-out forwards; transform-origin: center; }
+.avatar-head-tilt     { animation: avatar-head-tilt 1.8s ease-in-out infinite alternate; transform-origin: 50% 70%; transform-box: fill-box; }
+.avatar-thinking-dot  { animation: avatar-thinking-dot 1.2s ease-in-out infinite; }
+.avatar-wave          { animation: avatar-wave-cycle 5s ease-in-out infinite; transform-origin: 70% 90%; transform-box: fill-box; }
+.avatar-z             { animation: avatar-z-rise 1.8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.avatar-page-turn     { animation: avatar-page-turn 1.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-float,
+  .avatar-breathe,
+  .avatar-sleep-breathe,
+  .avatar-celebrate-bounce,
+  .avatar-confetti,
+  .avatar-head-tilt,
+  .avatar-thinking-dot,
+  .avatar-wave,
+  .avatar-z,
+  .avatar-page-turn { animation: none !important; }
+}

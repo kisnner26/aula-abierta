@@ -1,0 +1,1 @@
+export { IllustrationPlaceholder } from './IllustrationPlaceholder'
