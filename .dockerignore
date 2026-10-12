@@ -1,0 +1,13 @@
+.git
+.local
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+**/vendor
+**/dist
+**/*.tsbuildinfo
+**/.phpunit.cache
+**/.phpunit.result.cache
+aula-abierta-backend/storage
+aula-abierta-backend/bootstrap/cache
