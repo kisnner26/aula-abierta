@@ -102,6 +102,66 @@ aula-abierta-backend/    Laravel REST API (Sanctum auth, Spatie Permission, acti
 
 ## Quick start
 
+### Docker (recommended for local development)
+
+Install Docker Engine with Compose v2+, or Docker Desktop with Linux containers
+(on Windows, start Docker Desktop from the Start menu). From the repository root:
+
+```bash
+docker compose up
+```
+
+Compose builds the images on first use, installs the locked dependencies, waits
+for PostgreSQL and MinIO, creates a private storage bucket, runs migrations and
+seeds an empty database. No host PHP, Composer, Node.js, PostgreSQL or external
+S3 account is required. The first build includes compiling MinIO from a pinned
+official community source release and can take several minutes.
+
+- App: **http://127.0.0.1:5173**
+- API: **http://127.0.0.1:8000/api/v1**
+- MinIO console: **http://127.0.0.1:9001**
+- Demo login: SIS ID `SA-0001`, password `AulaDocker!2026`.
+  Other IDs: coordinator `CO-0001`, teacher `TR-0001`, student `ST-0001`.
+  The same default development password applies to these roles.
+- MinIO login: `aula-minio` / `aula-minio-development`.
+
+These credentials are **local development defaults**. Copy the root
+`.env.example` to `.env` to customize passwords and ports before the first start.
+Defaults also work without copying it. Changing seed password variables later
+does not change existing users' passwords.
+
+```bash
+docker compose up -d --build --wait  # start in the background, wait until ready
+docker compose logs -f backend     # inspect startup and application output
+docker compose exec backend php artisan migrate
+docker compose exec frontend npm run build
+docker compose down                # stop; preserve databases and uploaded files
+```
+
+The generated Laravel key, PostgreSQL data, MinIO objects, and Laravel storage
+persist in named volumes. Restarting preserves the key and existing users;
+seeders run only when the users table is empty, inside a transaction. Source
+changes are bind mounted, with separate Linux dependency and runtime volumes.
+Backend and frontend `.env` files from native installations are not overwritten.
+PostgreSQL is available internally as `postgres:5432` and has no host port.
+
+The root Docker `.env` is separate from each application's native `.env`.
+If ports 8000 or 5173 are already in use, change `BACKEND_PORT` and
+`FRONTEND_PORT` in the root `.env`, for example to `18000` and `15173`.
+Compose adjusts the browser API URL, CORS and application URLs automatically.
+`MINIO_PORT` and `MINIO_CONSOLE_PORT` are configurable too. Inside Docker, S3
+operations use `http://minio:9000`; signed browser downloads use the published
+MinIO endpoint. Buckets remain private.
+
+Run the integration check against a running stack with Python 3 (standard
+library only): `python docker/smoke-test.py`. It verifies all four role logins,
+private S3 upload/download, and persistence after recreating the containers.
+It leaves the stack running and removes its temporary probe data.
+
+To intentionally reset **all Docker development data**, use
+`docker compose down --volumes`. This deletes the Compose volumes, including
+the database, uploaded files and generated application key.
+
 ### Prerequisites
 - Node.js 20+
 - PHP 8.3+ and Composer

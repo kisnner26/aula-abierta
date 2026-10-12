@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-return Application::configure(basePath: dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
@@ -39,3 +39,11 @@ return Application::configure(basePath: dirname(__DIR__))
         });
     })
     ->create();
+
+// Docker keeps its generated environment in the persistent storage volume.
+// Native installations continue to use the project's usual .env path.
+if ($environmentPath = getenv('AULA_ENV_PATH')) {
+    $app->useEnvironmentPath($environmentPath);
+}
+
+return $app;
